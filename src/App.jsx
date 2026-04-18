@@ -3,6 +3,8 @@ import { Center, Html, useGLTF } from "@react-three/drei";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { MathUtils } from "three";
 
+const modelPath = `${import.meta.env.BASE_URL}models/dragon.glb`;
+
 function getSceneConfig(width, height) {
   const isShortScreen = height < 760;
 
@@ -47,7 +49,7 @@ function getInitialSceneConfig() {
 
 function DragonModel({ targetRotation, modelScale, modelPosition }) {
   const groupRef = useRef(null);
-  const { scene } = useGLTF("/models/dragon.glb");
+  const { scene } = useGLTF(modelPath);
 
   useFrame(() => {
     if (!groupRef.current) {
@@ -204,4 +206,4 @@ export default function App() {
   );
 }
 
-useGLTF.preload("/models/dragon.glb");
+useGLTF.preload(modelPath);
