@@ -1,0 +1,226 @@
+:root {
+  color-scheme: dark;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  background: #090411;
+  color: #f6ecda;
+  --content-gutter: clamp(1rem, 4vw, 4rem);
+  --panel-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top, rgba(255, 122, 69, 0.22), transparent 32%),
+    radial-gradient(circle at bottom left, rgba(34, 119, 255, 0.18), transparent 28%),
+    linear-gradient(180deg, #13071d 0%, #090411 55%, #030107 100%);
+}
+
+.app-shell {
+  position: relative;
+}
+
+.scene-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.scene-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at center, transparent 0 28%, rgba(5, 2, 8, 0.1) 65%),
+    linear-gradient(180deg, rgba(4, 1, 8, 0.08), rgba(4, 1, 8, 0.42));
+}
+
+.scene-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.scene-glow {
+  position: absolute;
+  inset: auto;
+  width: min(26rem, 72vw);
+  height: min(26rem, 72vw);
+  border-radius: 999px;
+  filter: blur(72px);
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.scene-glow-left {
+  top: 10%;
+  left: -6rem;
+  background: rgba(255, 122, 69, 0.42);
+}
+
+.scene-glow-right {
+  right: -8rem;
+  bottom: 6%;
+  background: rgba(80, 143, 255, 0.32);
+}
+
+.content-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.panel {
+  min-height: var(--panel-height);
+  min-height: 100svh;
+  min-height: 100dvh;
+  display: grid;
+  align-items: center;
+  padding:
+    max(1.5rem, env(safe-area-inset-top))
+    var(--content-gutter)
+    max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.panel:nth-child(1) {
+  justify-items: start;
+}
+
+.panel:nth-child(2) {
+  justify-items: center;
+}
+
+.panel:nth-child(3) {
+  justify-items: end;
+}
+
+.panel-card {
+  width: min(32rem, 100%);
+  padding: clamp(1.5rem, 2vw, 2.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1.75rem;
+  backdrop-filter: blur(16px);
+  background: linear-gradient(180deg, rgba(17, 10, 27, 0.74), rgba(6, 3, 12, 0.55));
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.25);
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #f8b86f;
+  font-size: 0.82rem;
+}
+
+h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.8rem, 7vw, 5.6rem);
+  line-height: 0.95;
+}
+
+.copy {
+  margin: 1.2rem 0 0;
+  max-width: 28rem;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.8;
+  color: rgba(246, 236, 218, 0.9);
+}
+
+.loader {
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f6ecda;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .scene-glow-left {
+    left: -8rem;
+  }
+
+  .scene-glow-right {
+    right: -10rem;
+  }
+
+  .panel {
+    padding-inline: clamp(1.2rem, 5vw, 2.5rem);
+  }
+
+  .panel:nth-child(1),
+  .panel:nth-child(2),
+  .panel:nth-child(3) {
+    justify-items: center;
+  }
+
+  .panel-card {
+    width: min(34rem, 100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .panel {
+    padding-inline: 1rem;
+  }
+
+  .panel-card {
+    width: 100%;
+    border-radius: 1.35rem;
+    padding: 1.25rem;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 14vw, 4.4rem);
+    line-height: 1;
+  }
+
+  .copy {
+    line-height: 1.65;
+  }
+}
+
+@media (max-width: 480px) {
+  .scene-glow {
+    filter: blur(56px);
+    opacity: 0.42;
+  }
+
+  .panel {
+    align-items: end;
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
+
+  .eyebrow {
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+  }
+
+  .copy {
+    margin-top: 1rem;
+    font-size: 0.98rem;
+  }
+
+  .loader {
+    font-size: 0.76rem;
+    padding: 0.55rem 0.85rem;
+  }
+}
