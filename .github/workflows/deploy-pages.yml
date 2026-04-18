@@ -12,25 +12,25 @@ permissions:
   id-token: write
 
 concurrency:
-  group: github-pages
+  group: pages
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
 
       - name: Install Dependencies
         run: npm ci
@@ -38,19 +38,14 @@ jobs:
       - name: Build Site
         run: npm run build
 
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
       - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Deploy To Pages
         id: deployment
         uses: actions/deploy-pages@v4
