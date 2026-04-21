@@ -6,16 +6,6 @@ A cinematic React + Three.js landing page that presents a 3D dragon model across
 
 [View the live site](https://abhishek7135.github.io/dragon-3d-model/)
 
-## Preview
-
-### Desktop
-
-![Desktop preview](docs/screenshots/desktop-showcase.png)
-
-### Responsive Narrow Screen
-
-![Responsive narrow-screen preview](docs/screenshots/mobile-showcase.png)
-
 ## Features
 
 - Scroll-driven 3D dragon rotation
